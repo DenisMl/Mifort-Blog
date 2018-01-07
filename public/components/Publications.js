@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 
-export default class Header extends React.Component {
+export default class Publications extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -14,7 +14,7 @@ export default class Header extends React.Component {
 
     return (
       <div>
-          Header
+        Publications
       </div>
     );
   };

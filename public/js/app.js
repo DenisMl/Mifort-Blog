@@ -1,100 +1,93 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from "react-dom";
+import {Route, BrowserRouter as Router, browserHistory, Switch} from 'react-router-dom';
 
-import Project from '../components/project';
 import Header from '../components/header';
+import Publications from "../components/Publications";
 
-let App = React.createClass({
+class App extends Component {
 
-    getUserInfo: function() {
-        let self = this;
-        fetch('/app/getUserInfo', {
-            method: 'get',
-            dataType: 'json',
-            credentials: 'include'
-        }).then(function(res) {
-            return res.json();
-        }).then(function(res) {
-            self.setState({user: res});
-        }).then(function(res) {
-            self.getProjectsInfo();
-        }).catch(function(err) {
-            console.log(`>>err: ${err}`);
-        });
-    },
+  constructor(props) {
+    super(props);
+    this.state = {};
 
-    getProjectsInfo: function() {
-        let self = this;
-        let body = JSON.stringify({isManager: this.state.user.isManager});
-        fetch('/app/getProjectsInfo', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            body: body,
-            credentials: 'include'
-        }).then(function(res) {
-            return res.json();
-        }).then(function(res) {
-            self.setState({projects: res});
-        }).catch(function(err) {
-            console.log(`>>err: ${err}`);
-        });
-    },
+    // this.toOpenCheckout = this.toOpenCheckout.bind(this);
+  };
 
-    closeAllTasks: function() {
-        for (let i = 0; i < this.state.projects.length; i++) {
-            let projectRef = 'project' + i;
-            this.refs[projectRef].hideTasks();
-        }
-    },
+  // getUserInfo() {
+  //   let self = this;
+  //   fetch('/app/getUserInfo', {
+  //     method: 'get',
+  //     dataType: 'json',
+  //     credentials: 'include'
+  //   }).then(function (res) {
+  //     return res.json();
+  //   }).then(function (res) {
+  //     self.setState({user: res});
+  //   }).then(function (res) {
+  //     self.getProjectsInfo();
+  //   }).catch(function (err) {
+  //     console.log(`>>err: ${err}`);
+  //   });
+  // }
+  //
+  // getProjectsInfo() {
+  //   let self = this;
+  //   let body = JSON.stringify({isManager: this.state.user.isManager});
+  //   fetch('/app/getProjectsInfo', {
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     method: 'POST',
+  //     body: body,
+  //     credentials: 'include'
+  //   }).then(function (res) {
+  //     return res.json();
+  //   }).then(function (res) {
+  //     self.setState({projects: res});
+  //   }).catch(function (err) {
+  //     console.log(`>>err: ${err}`);
+  //   });
+  // }
+  //
+  //
+  // componentDidMount() {
+  //   this.getUserInfo();
+  // }
 
-    closeAllDescriptions: function() {
-        let taskChosen = document.getElementsByClassName("task-chosen");
-        if (taskChosen.length) {
-            taskChosen[0].classList.add('task-unchosen');
-            taskChosen[0].classList.remove('task-chosen');
-        }
-    },
+  // renderProject(project, i) {
+  //   let ref = 'project' + i;
+  //   return (<Project ref={ref} key={i} index={i} user={this.state.user} project={project}
+  //                    closeAllDescriptions={this.closeAllDescriptions} getProjectsInfo={this.getProjectsInfo}
+  //                    closeAllTasks={this.closeAllTasks}/>);
+  // }
 
-    renderProject: function(project, i) {
-        let ref = 'project' + i;
-        return (<Project ref={ref} key={i} index={i} user={this.state.user} project={project} closeAllDescriptions={this.closeAllDescriptions} getProjectsInfo={this.getProjectsInfo} closeAllTasks={this.closeAllTasks}/>);
-    },
+  render() {
+    return (
+      <div>
+        <Header/>
+        <Router history={browserHistory}>
+          <Switch>
+            <Route exact path="/" component={Publications}/>
+            {/*<Route path="/signup" component={SignUp}/>*/}
+            {/*<Route path="/login" component={Login}/>*/}
+          </Switch>
+        </Router>
+      </div>
+    );
+    // return (
+    //   <div>
+    //     <Header user={this.state.user} getProjectsInfo={this.getProjectsInfo}/>
+    //     <main>
+    //       <div className="project-box">
+    //         {this.state.projects.map(this.renderProject)}
+    //       </div>
+    //     </main>
+    //   </div>
+    // );
+  }
 
-    getInitialState: function() {
-        return {
-            user: {
-                email: '',
-                firstName: '',
-                lastName: '',
-                isManager: ''
-            },
-            projects: []
-        };
-    },
+}
 
-    render: function() {
-        return (
-            <div>
-
-                <Header user={this.state.user} getProjectsInfo={this.getProjectsInfo}/>
-
-                <main>
-                    <div className="project-box">
-                        {this.state.projects.map(this.renderProject)}
-                    </div>
-                </main>
-
-            </div>
-        );
-    },
-
-    componentDidMount: function() {
-        this.getUserInfo();
-    }
-});
-
-ReactDOM.render(
-    <App/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
