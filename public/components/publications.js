@@ -9,6 +9,10 @@ export default class Publications extends Component {
     // this.toOpenCheckout = this.toOpenCheckout.bind(this);
   };
 
+  componentDidMount() {
+    this.props.history.push('/login')
+
+  }
   render() {
     // const props = this.props.location.state.product;
 

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
+// import { withCookies, Cookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
 import {Route, BrowserRouter as Router, browserHistory, Switch} from 'react-router-dom';
 
 import Header from '../components/header';
-import Publications from "../components/Publications";
+import Publications from "../components/publications";
+import Login from "../components/login";
 
 class App extends Component {
 
@@ -52,16 +55,12 @@ class App extends Component {
   // }
   //
   //
-  // componentDidMount() {
-  //   this.getUserInfo();
-  // }
 
-  // renderProject(project, i) {
-  //   let ref = 'project' + i;
-  //   return (<Project ref={ref} key={i} index={i} user={this.state.user} project={project}
-  //                    closeAllDescriptions={this.closeAllDescriptions} getProjectsInfo={this.getProjectsInfo}
-  //                    closeAllTasks={this.closeAllTasks}/>);
-  // }
+
+  componentDidMount() {
+    const cookies = new Cookies();
+    this.setState({authorized: cookies.get('Authorized')});
+  }
 
   render() {
     return (
@@ -71,21 +70,12 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Publications}/>
             {/*<Route path="/signup" component={SignUp}/>*/}
-            {/*<Route path="/login" component={Login}/>*/}
+            {/*<Route exact path="/profile" render={(props) => ( <Profile user={this.props.user}/> )} />*/}
+            <Route path="/login" render={(props) => ( <Login authorized={this.state.authorized} /> )} />
           </Switch>
         </Router>
       </div>
     );
-    // return (
-    //   <div>
-    //     <Header user={this.state.user} getProjectsInfo={this.getProjectsInfo}/>
-    //     <main>
-    //       <div className="project-box">
-    //         {this.state.projects.map(this.renderProject)}
-    //       </div>
-    //     </main>
-    //   </div>
-    // );
   }
 
 }
