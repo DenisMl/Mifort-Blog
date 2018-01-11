@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import React, {Component} from 'react';
+import {Route, Link, BrowserRouter as Router, browserHistory, withRouter, Switch} from 'react-router-dom';
 
-export default class Login extends Component {
+
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,6 +14,7 @@ export default class Login extends Component {
     // this.props.history.push('/login')
 
   }
+
   render() {
     // const props = this.props.location.state.product;
 
@@ -20,13 +22,15 @@ export default class Login extends Component {
       <div className="login-page">
         <div className="form">
           <form className="login-form" method="post" action="/login">
-            <input name="email" type="email" placeholder="email"/>
-            <input name="password" type="password" placeholder="password"/>
+            <input name="email" type="email" placeholder="email" autoComplete="email" required/>
+            <input name="password" type="password" placeholder="password" autoComplete="password" required/>
             <button className="button" type="submit">login</button>
-            <p className="message">Not registered? <a href="">Create an account</a></p>
+            <p className="message">Not registered? <Link to='/register'>Create an account</Link></p>
           </form>
         </div>
       </div>
     );
   };
 };
+
+export default withRouter(Login);

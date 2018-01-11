@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import {Route, Link, BrowserRouter as Router, browserHistory, withRouter, Switch} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
-export default class Publications extends Component {
+class Publications extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -10,11 +11,17 @@ export default class Publications extends Component {
   };
 
   componentDidMount() {
-    this.props.history.push('/login')
+    // console.log(`auth`);
+    // console.log(this.props.authorized == 'false');
+    if (this.props.authorized == 'false') {
+      console.log(`login`);
+      this.props.history.push('/login');
+    }
 
   }
   render() {
-    // const props = this.props.location.state.product;
+    // const props =
+    //  console.log(this.props.location.state);
 
     return (
       <div>
@@ -23,3 +30,5 @@ export default class Publications extends Component {
     );
   };
 };
+
+export default withRouter(Publications);

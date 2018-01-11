@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 let mainController = require('../controllers/mainController');
 
-router.get('/', mainController.mainPage);
+router.get('/*', mainController.mainPage);
 // router.get('/login', mainController.loginPage);
 // router.get('/register', mainController.registerPage);
 router.post('/login', mainController.login);

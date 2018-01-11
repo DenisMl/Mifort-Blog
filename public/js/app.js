@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from "react-dom";
-// import { withCookies, Cookies } from 'react-cookie';
 import Cookies from 'universal-cookie';
 import {Route, BrowserRouter as Router, browserHistory, Switch} from 'react-router-dom';
 
 import Header from '../components/header';
 import Publications from "../components/publications";
 import Login from "../components/login";
+import Register from "../components/register";
 
 class App extends Component {
 
@@ -57,7 +57,7 @@ class App extends Component {
   //
 
 
-  componentDidMount() {
+  componentWillMount() {
     const cookies = new Cookies();
     this.setState({authorized: cookies.get('Authorized')});
   }
@@ -68,10 +68,9 @@ class App extends Component {
         <Header/>
         <Router history={browserHistory}>
           <Switch>
-            <Route exact path="/" component={Publications}/>
-            {/*<Route path="/signup" component={SignUp}/>*/}
-            {/*<Route exact path="/profile" render={(props) => ( <Profile user={this.props.user}/> )} />*/}
-            <Route path="/login" render={(props) => ( <Login authorized={this.state.authorized} /> )} />
+            <Route exact path="/" render={(props) => ( <Publications authorized={this.state.authorized}/> )}/>
+            <Route path="/login" render={(props) => ( <Login authorized={this.state.authorized}/> )}/>
+            <Route path="/register" render={(props) => ( <Register authorized={this.state.authorized}/> )}/>
           </Switch>
         </Router>
       </div>

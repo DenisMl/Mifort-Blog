@@ -1,5 +1,6 @@
 let User = require('../models/user');
 let async = require('async');
+let path = require('path');
 // let Project = require('../models/project');
 // let fs = require('fs');
 let mainController = {};
@@ -10,24 +11,24 @@ mainController.mainPage = function (req, res) {
     console.log(`>>NO session: ${req.session.user}`);
     // res.setHeader("Authorized", "false");
     res.setHeader("Set-Cookie", ["Authorized=false"]);
-    res.sendfile('./public/main.html');
+    res.sendFile(path.resolve(__dirname, '../public/main.html'));
   } else {
     console.log(`>>session: ${req.session.user}`);
     // res.setHeader("Authorized", "true");
     res.setHeader("Set-Cookie", ["Authorized=true"]);
-    res.sendfile('./public/main.html');
+    res.sendFile(path.resolve(__dirname, '../public/main.html'));
   }
 };
 
-mainController.loginPage = function (req, res) {
-  req.session.destroy();
-  res.sendfile('./public/login.html');
-};
-
-mainController.registerPage = function (req, res) {
-  req.session.destroy();
-  res.sendfile('./public/register.html');
-};
+// mainController.loginPage = function (req, res) {
+//   req.session.destroy();
+//   res.sendfile('./public/login.html');
+// };
+//
+// mainController.registerPage = function (req, res) {
+//   req.session.destroy();
+//   res.sendfile('./public/register.html');
+// };
 
 mainController.logout = function (req, res) {
   req.session.destroy();
