@@ -14,7 +14,7 @@ class App extends Component {
     super(props);
     this.state = {};
 
-    // this.toOpenCheckout = this.toOpenCheckout.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
   };
 
   // getUserInfo() {
@@ -56,6 +56,21 @@ class App extends Component {
   //
   //
 
+  getUserInfo() {
+    let self = this;
+    fetch('/app/getUserInfo', {
+      method: 'get',
+      dataType: 'json',
+      credentials: 'include'
+    }).then(function (res) {
+      return res.json();
+    }).then(function (res) {
+      console.log(`getUserInfo res: ${res}`);
+      self.setState({user: res});
+    }).catch(function (err) {
+      console.log(`>>err: ${err}`);
+    });
+  }
 
   componentWillMount() {
     const cookies = new Cookies();
@@ -65,12 +80,19 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <Header user={this.state.user}/>
         <Router history={browserHistory}>
           <Switch>
-            <Route exact path="/" render={(props) => ( <Publications authorized={this.state.authorized}/> )}/>
-            <Route path="/login" render={(props) => ( <Login authorized={this.state.authorized}/> )}/>
-            <Route path="/register" render={(props) => ( <Register authorized={this.state.authorized}/> )}/>
+            <Route exact path="/" render={(props) => (
+              <Publications authorized={this.state.authorized}
+                            getUserInfo={this.getUserInfo}
+              /> )}/>
+            <Route path="/login" render={(props) => (
+              <Login authorized={this.state.authorized}
+              /> )}/>
+            <Route path="/register" render={(props) => (
+              <Register authorized={this.state.authorized}/>
+            )}/>
           </Switch>
         </Router>
       </div>

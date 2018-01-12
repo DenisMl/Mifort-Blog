@@ -32,8 +32,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/public'));
 
-app.use('/', mainRoutes);
 app.use('/app', appRoutes);
+app.use('/', mainRoutes);
 
 http.createServer(app).listen(config.get('port'), function() {
     console.log('Express server listening on port ' + config.get('port'));

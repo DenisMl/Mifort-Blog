@@ -20,16 +20,6 @@ mainController.mainPage = function (req, res) {
   }
 };
 
-// mainController.loginPage = function (req, res) {
-//   req.session.destroy();
-//   res.sendfile('./public/login.html');
-// };
-//
-// mainController.registerPage = function (req, res) {
-//   req.session.destroy();
-//   res.sendfile('./public/register.html');
-// };
-
 mainController.logout = function (req, res) {
   req.session.destroy();
   res.redirect('/');

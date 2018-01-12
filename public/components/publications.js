@@ -7,15 +7,15 @@ class Publications extends Component {
     super(props);
     this.state = {};
 
-    // this.toOpenCheckout = this.toOpenCheckout.bind(this);
+    // this.getUserInfo = this.props.getUserInfo.bind(this);
   };
 
   componentDidMount() {
-    // console.log(`auth`);
-    // console.log(this.props.authorized == 'false');
     if (this.props.authorized == 'false') {
       console.log(`login`);
       this.props.history.push('/login');
+    } else {
+      this.props.getUserInfo();
     }
 
   }
@@ -24,7 +24,7 @@ class Publications extends Component {
     //  console.log(this.props.location.state);
 
     return (
-      <div>
+      <div className="publications-wrapper">
         Publications
       </div>
     );

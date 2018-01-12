@@ -10,6 +10,7 @@ body {
 }
 
 h1, h2, h3, h4 {
+    font-size: 17px;
     margin: 7px 0 7px 0;
     display: inline-block;
 }
@@ -272,7 +273,7 @@ p {
     float: left;
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 .header-buttons {
 
