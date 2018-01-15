@@ -8,84 +8,35 @@ import Publications from "../components/publications";
 import Login from "../components/login";
 import Register from "../components/register";
 
+import {getUserInfo, getPublications, addPublication} from "../components/methods";
+
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {};
 
-    this.getUserInfo = this.getUserInfo.bind(this);
+    this.getUserInfo = getUserInfo.bind(this);
+    this.getPublications = getPublications.bind(this);
+    this.addPublication = addPublication.bind(this);
   };
-
-  // getUserInfo() {
-  //   let self = this;
-  //   fetch('/app/getUserInfo', {
-  //     method: 'get',
-  //     dataType: 'json',
-  //     credentials: 'include'
-  //   }).then(function (res) {
-  //     return res.json();
-  //   }).then(function (res) {
-  //     self.setState({user: res});
-  //   }).then(function (res) {
-  //     self.getProjectsInfo();
-  //   }).catch(function (err) {
-  //     console.log(`>>err: ${err}`);
-  //   });
-  // }
-  //
-  // getProjectsInfo() {
-  //   let self = this;
-  //   let body = JSON.stringify({isManager: this.state.user.isManager});
-  //   fetch('/app/getProjectsInfo', {
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     method: 'POST',
-  //     body: body,
-  //     credentials: 'include'
-  //   }).then(function (res) {
-  //     return res.json();
-  //   }).then(function (res) {
-  //     self.setState({projects: res});
-  //   }).catch(function (err) {
-  //     console.log(`>>err: ${err}`);
-  //   });
-  // }
-  //
-  //
-
-  getUserInfo() {
-    let self = this;
-    fetch('/app/getUserInfo', {
-      method: 'get',
-      dataType: 'json',
-      credentials: 'include'
-    }).then(function (res) {
-      return res.json();
-    }).then(function (res) {
-      console.log(`getUserInfo res: ${res}`);
-      self.setState({user: res});
-    }).catch(function (err) {
-      console.log(`>>err: ${err}`);
-    });
-  }
 
   componentWillMount() {
     const cookies = new Cookies();
+    this.getPublications();
     this.setState({authorized: cookies.get('Authorized')});
   }
 
   render() {
     return (
       <div>
-        <Header user={this.state.user}/>
+        <Header user={this.state.user} addPublication={this.addPublication}/>
         <Router history={browserHistory}>
           <Switch>
             <Route exact path="/" render={(props) => (
               <Publications authorized={this.state.authorized}
                             getUserInfo={this.getUserInfo}
+                            publications={this.state.publications}
               /> )}/>
             <Route path="/login" render={(props) => (
               <Login authorized={this.state.authorized}

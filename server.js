@@ -7,7 +7,7 @@ let cookieParser = require('cookie-parser');
 let morgan = require('morgan');
 let mongoose = require('./libs/mongoose');
 let mainRoutes = require('./routes/mainRoutes');
-let appRoutes = require('./routes/appRoutes');
+let apiRoutes = require('./routes/apiRoutes');
 
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/public'));
 
-app.use('/app', appRoutes);
+app.use('/api', apiRoutes);
 app.use('/', mainRoutes);
 
 http.createServer(app).listen(config.get('port'), function() {

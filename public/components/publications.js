@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Route, Link, BrowserRouter as Router, browserHistory, withRouter, Switch} from 'react-router-dom';
-import Cookies from 'universal-cookie';
+import Publication from "./publication";
+
 
 class Publications extends Component {
   constructor(props) {
     super(props);
     this.state = {};
 
-    // this.getUserInfo = this.props.getUserInfo.bind(this);
+    this.renderPublications = this.renderPublications.bind(this);
   };
 
   componentDidMount() {
@@ -17,15 +18,24 @@ class Publications extends Component {
     } else {
       this.props.getUserInfo();
     }
-
   }
-  render() {
-    // const props =
-    //  console.log(this.props.location.state);
 
+  renderPublications() {
+    console.log(`this.props.publications`);
+    console.log(this.props.publications);
+    if (this.props.publications) {
+      return this.props.publications.map((pub, i) => {
+        return (
+          <Publication publication={pub} key={i}/>
+        )
+      })
+    }
+  }
+
+  render() {
     return (
       <div className="publications-wrapper">
-        Publications
+        {this.renderPublications()}
       </div>
     );
   };

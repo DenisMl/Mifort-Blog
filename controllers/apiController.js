@@ -1,10 +1,10 @@
 let User = require('../models/user');
-let Project = require('../models/project');
+let Publication = require('../models/publication');
 let async = require('async');
 
-let appController = {};
+let apiController = {};
 
-appController.getUserInfo = function (req, res) {
+apiController.getUserInfo = function (req, res) {
   let userInfo = {};
 
   async.waterfall([
@@ -36,97 +36,35 @@ appController.getUserInfo = function (req, res) {
   });
 };
 
-appController.getProjectsInfo = function (req, res) {
-  if (req.body.isManager) {
-    appController.getProjectsInfoForManager(req, res);
-  } else {
-    appController.getProjectsInfoForDeveloper(req, res);
-  }
+apiController.getPublications = function (req, res) {
+  Publication.find({}, function (err, doc) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(doc);
+    }
+  })
 };
 
-appController.getProjectsInfoForManager = function (req, res) {
-  async.waterfall([
-    function (callback) {
-      Project.find({
-        author: req.session.user
-      }, callback);
-    },
-    function (projects, callback) { //1st arg: projects or null
-      if (projects) {
-        callback(null, projects);
-      } else {
-        callback('projects not found');
-      }
-    }
-  ], function (err, projectsInfo) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
+apiController.addPublication = function (req, res) {
+  Publication.findOne({publicationName: req.body.publicationName}, function (err, doc) {
+    if (doc) {
+      res.send('Publication with this name already exists');
     } else {
-      res.json(projectsInfo);
+      let publication = new Publication({publicationName: req.body.publicationName, author: req.session.user});
+      publication.save(function (err, doc) {
+        if (err) {
+          res.send(err);
+        } else {
+          // res.send(doc);
+          apiController.getPublications(req, res);
+        }
+      });
     }
   });
 };
 
-appController.getProjectsInfoForDeveloper = function (req, res) {
-  async.waterfall([
-    function (callback) {
-      // PersonModel.find({ favouriteFoods: "sushi" }, ...);
-      Project.find({
-        developers: req.session.user
-      }, callback);
-    },
-    function (projects, callback) {
-      if (projects) {
-        callback(null, projects);
-      } else {
-        callback('projects not found');
-      }
-    }
-  ], function (err, projectsInfo) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
-    } else {
-      res.json(projectsInfo);
-    }
-  });
-};
-
-appController.createProject = function (req, res) {
-
-  async.waterfall([
-    function (callback) {
-      Project.findOne({
-        projectName: req.body.projectName
-      }, callback);
-    },
-    function (project, callback) {
-      if (project) {
-        callback('Project with this name already exists');
-      } else {
-        let project = new Project({projectName: req.body.projectName, author: req.session.user});
-        project.save(function (err) {
-          if (err) {
-            callback(err);
-          } else {
-            callback(null, project);
-          }
-        });
-      }
-    }
-  ], function (err, project) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
-    } else {
-      res.end('ok');
-    }
-  });
-
-};
-
-appController.deleteProject = function (req, res) {
+apiController.deleteProject = function (req, res) {
   Project.findByIdAndRemove(req.body.projectId, function (err, project) {
     if (err) {
       console.error('>> ' + err);
@@ -136,7 +74,7 @@ appController.deleteProject = function (req, res) {
   });
 };
 
-appController.deleteTask = function (req, res) {
+apiController.deleteTask = function (req, res) {
   Project.findByIdAndUpdate(req.body.projectId, { //id of project
     $pull: {
       'tasks': {
@@ -153,7 +91,7 @@ appController.deleteTask = function (req, res) {
   });
 };
 
-appController.createTask = function (req, res) {
+apiController.createTask = function (req, res) {
   Project.findByIdAndUpdate(req.body.projectId, { //id of project
     $push: {
       'tasks': {
@@ -174,7 +112,7 @@ appController.createTask = function (req, res) {
   });
 };
 
-appController.addDevToProject = function (req, res) {
+apiController.addDevToProject = function (req, res) {
   let developers;
   async.waterfall([
     function (callback) {
@@ -206,7 +144,7 @@ appController.addDevToProject = function (req, res) {
   });
 };
 
-appController.getAllDevs = function (req, res) {
+apiController.getAllDevs = function (req, res) {
   User.find({
     isManager: false
   }, function (err, users) {
@@ -228,7 +166,7 @@ appController.getAllDevs = function (req, res) {
   });
 };
 
-appController.getProjectDevelopers = function (req, res) {
+apiController.getProjectDevelopers = function (req, res) {
   User.find({
     _id: {
       $in: req.body.projectDevelopers
@@ -252,7 +190,7 @@ appController.getProjectDevelopers = function (req, res) {
   });
 };
 
-appController.getTaskDevelopers = function (req, res) {
+apiController.getTaskDevelopers = function (req, res) {
   User.find({
     _id: {
       $in: req.body.taskDevelopers
@@ -276,7 +214,7 @@ appController.getTaskDevelopers = function (req, res) {
   });
 };
 
-appController.addDevToTask = function (req, res) {
+apiController.addDevToTask = function (req, res) {
   let developers;
   async.waterfall([
     function (callback) {
@@ -327,7 +265,7 @@ appController.addDevToTask = function (req, res) {
   });
 };
 
-appController.changeTaskStatus = function (req, res) {
+apiController.changeTaskStatus = function (req, res) {
   Project.findOneAndUpdate({
     '_id': req.body.projectId,
     'tasks._id': req.body.taskId
@@ -345,7 +283,7 @@ appController.changeTaskStatus = function (req, res) {
   });
 };
 
-appController.addComment = function (req, res) {
+apiController.addComment = function (req, res) {
   Project.findOneAndUpdate({
     '_id': req.body.projectId,
     'tasks._id': req.body.taskId
@@ -377,7 +315,7 @@ appController.addComment = function (req, res) {
   });
 };
 
-appController.getCommentsAuthors = function (req, res) {
+apiController.getCommentsAuthors = function (req, res) {
   User.find({
     _id: {
       $in: req.body.authorsIDs
@@ -401,4 +339,4 @@ appController.getCommentsAuthors = function (req, res) {
   });
 };
 
-module.exports = appController;
+module.exports = apiController;
