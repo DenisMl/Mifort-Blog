@@ -8,9 +8,10 @@ class Publication extends Component {
   };
 
   render() {
+    const url = `/publication?id=${this.props.publication._id}`;
     return (
       <div className="publication">
-        <span>{this.props.publication.publicationName}</span>
+        <Link to={url}>{this.props.publication.publicationName}</Link>
       </div>
     );
   };

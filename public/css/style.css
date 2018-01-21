@@ -96,7 +96,7 @@ p {
 }
 
 .publications-wrapper {
-    top: 36px;
+    /* top: 36px; */
     position: relative;
 }
 
@@ -293,4 +293,10 @@ p {
 
 .header-buttons {
 
+}
+
+.main-wrapper {
+    position: relative;
+    top: 36px;
+    padding: 20px;
 }

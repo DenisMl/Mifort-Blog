@@ -7,6 +7,9 @@ let schema = new Schema({
     unique: true,
     required: true
   },
+  publicationText: {
+    type: String
+  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

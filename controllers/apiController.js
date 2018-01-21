@@ -46,6 +46,16 @@ apiController.getPublications = function (req, res) {
   })
 };
 
+apiController.getPublication = function (req, res) {
+  Publication.findById(req.body.id, function (err, doc) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(doc);
+    }
+  })
+};
+
 apiController.addPublication = function (req, res) {
   Publication.findOne({publicationName: req.body.publicationName}, function (err, doc) {
     if (doc) {

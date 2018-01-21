@@ -16,7 +16,7 @@ class Publications extends Component {
       console.log(`login`);
       this.props.history.push('/login');
     } else {
-      this.props.getUserInfo();
+      // this.props.getUserInfo();
     }
   }
 
@@ -39,6 +39,6 @@ class Publications extends Component {
       </div>
     );
   };
-};
+}
 
 export default withRouter(Publications);

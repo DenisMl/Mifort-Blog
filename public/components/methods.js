@@ -52,3 +52,24 @@ export function addPublication(publicationName) {
     console.error(`>>err: ${err}`);
   });
 }
+
+export function getPublication(id) {
+  let self = this;
+  let body = JSON.stringify({id: id});
+  fetch('/api/getPublication', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: body,
+    credentials: 'include'
+  }).then(function (res) {
+    return res.json();
+  }).then(function (res) {
+    console.log(res);
+    self.setState({publication: res});
+  }).catch(function (err) {
+    console.error(`>>err: ${err}`);
+  });
+}

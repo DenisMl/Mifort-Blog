@@ -19,12 +19,12 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 
 app.use(session({
-    secret: config.get('session:secret'),
-    key: config.get('session:key'),
-    cookie: config.get('session:cookie'),
-    saveUninitialized: false,
-    resave: false,
-    store: mongoose_store
+  secret: config.get('session:secret'),
+  key: config.get('session:key'),
+  cookie: config.get('session:cookie'),
+  saveUninitialized: false,
+  resave: false,
+  store: mongoose_store
 }));
 
 app.use(bodyParser.json());
@@ -35,6 +35,6 @@ app.use(express.static(__dirname + '/public'));
 app.use('/api', apiRoutes);
 app.use('/', mainRoutes);
 
-http.createServer(app).listen(config.get('port'), function() {
-    console.log('Express server listening on port ' + config.get('port'));
+http.createServer(app).listen(config.get('port'), function () {
+  console.log('Express server listening on port ' + config.get('port'));
 });
