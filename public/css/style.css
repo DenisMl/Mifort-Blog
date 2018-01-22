@@ -1,12 +1,21 @@
+html {
+    height: 100%;
+
+}
+
 body {
     background: #f1f9ff;
     margin: 0;
-    /*align-items: center;*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
     font-family: Verdana, Geneva, sans-serif;
-    /*-webkit-font-smoothing: antialiased;*/
-    /*-moz-osx-font-smoothing: grayscale;*/
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+.all-wrapper {
+    height: 100%;
 }
 
 h1, h2, h3, h4 {
@@ -15,9 +24,26 @@ h1, h2, h3, h4 {
     display: inline-block;
 }
 
+/*::-webkit-scrollbar {*/
+/*width: 0;*/
+/*background: transparent; !* optional: just make scrollbar invisible *!*/
+/*}*/
+
 ::-webkit-scrollbar {
-    width: 0;
-    background: transparent; /* optional: just make scrollbar invisible */
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    /*border: 1px solid yellowgreen;*/
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d8d8d8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bcbcbc;
 }
 
 .label {
@@ -96,8 +122,8 @@ p {
 }
 
 .publications-wrapper {
-    /* top: 36px; */
     position: relative;
+    padding: 20px;
 }
 
 .add-dev {
@@ -195,6 +221,7 @@ p {
     width: inherit;
     font-weight: 600;
     border-left: 1px solid rgba(0, 0, 0, 0.1);
+    text-decoration: none;
 }
 
 .button:hover, .button:active, .button:focus {
@@ -298,5 +325,53 @@ p {
 .main-wrapper {
     position: relative;
     top: 36px;
-    padding: 20px;
+}
+
+.add-publication {
+    padding-top: 10px;
+}
+
+.add-publication .add-publication-form {
+    width: 80%;
+    min-width: 700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: white;
+    box-shadow: 0 0 9px -3px black;
+}
+
+.add-publication-form .add-form-input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.add-publication-form .add-publication-title {
+
+}
+
+.add-publication-form .add-form-btn {
+    width: 100%;
+}
+
+.add-publication-form .add-publication-text {
+    overflow: scroll;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    max-width: 100%;
+    width: 100%;
+    max-height: 200px;
+    height: 170px;
+    resize: none;
 }

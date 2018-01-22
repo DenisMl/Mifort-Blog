@@ -1,7 +1,5 @@
 export function getUserInfo() {
   let self = this;
-  console.log(`getUser:`);
-  console.log(self);
   fetch('/api/getUserInfo', {
     method: 'get',
     dataType: 'json',
@@ -9,6 +7,7 @@ export function getUserInfo() {
   }).then(function (res) {
     return res.json();
   }).then(function (res) {
+    console.log(`v user:`);
     console.log(res);
     self.setState({user: res});
   }).catch(function (err) {
@@ -25,6 +24,7 @@ export function getPublications() {
   }).then(function (res) {
     return res.json();
   }).then(function (res) {
+    console.log(`v_publications`);
     console.log(res);
     self.setState({publications: res});
   }).catch(function (err) {
@@ -32,7 +32,9 @@ export function getPublications() {
   });
 }
 
-export function addPublication(publicationName) {
+export function addPublication(formData) {
+  console.log(formData);
+  debugger;
   let self = this;
   let body = JSON.stringify({publicationName: publicationName});
   fetch('/api/addPublication', {
@@ -46,7 +48,6 @@ export function addPublication(publicationName) {
   }).then(function (res) {
     return res.json();
   }).then(function (res) {
-    console.log(res);
     self.setState({publications: res});
   }).catch(function (err) {
     console.error(`>>err: ${err}`);
@@ -67,7 +68,6 @@ export function getPublication(id) {
   }).then(function (res) {
     return res.json();
   }).then(function (res) {
-    console.log(res);
     self.setState({publication: res});
   }).catch(function (err) {
     console.error(`>>err: ${err}`);

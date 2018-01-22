@@ -16,11 +16,12 @@ apiController.getUserInfo = function (req, res) {
     function (user, callback) { //1st arg: user or null
       if (user) {
         userInfo = {
+          'id': user._id,
           'email': user.email,
           'firstName': user.firstName,
           'lastName': user.lastName,
           'isManager': user.isManager
-        }
+        };
         callback(null, userInfo);
       } else {
         callback('user not found');

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 import Cookies from 'universal-cookie';
-import {Route, BrowserRouter as Router, browserHistory, Switch} from 'react-router-dom';
+import {Route, BrowserRouter, browserHistory, Switch} from 'react-router-dom';
 
 import Header from '../components/header';
 import Publications from "../components/publications";
 import PublicationPage from "../components/publicationPage";
+import AddPublication from "../components/addPublication";
 import Login from "../components/login";
 import Register from "../components/register";
 
@@ -34,32 +35,44 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header user={this.state.user} addPublication={this.addPublication}/>
-        <div className="main-wrapper">
-          <Router history={browserHistory}>
-            <Switch>
-              <Route exact path="/" render={(props) => (
-                <Publications authorized={this.state.authorized}
-                              getUserInfo={this.getUserInfo}
-                              publications={this.state.publications}
-                /> )}/>
-              <Route path="/publication" render={(props) => (
-                <PublicationPage authorized={this.state.authorized}
-                                 getUserInfo={this.getUserInfo}
-                                 getPublication={getPublication}
-                /> )}/>
+      <BrowserRouter>
+        <div className="all-wrapper">
+          <Header user={this.state.user}/>
+          <div className="main-wrapper">
 
-              <Route path="/login" render={(props) => (
-                <Login authorized={this.state.authorized}
-                /> )}/>
-              <Route path="/register" render={(props) => (
-                <Register authorized={this.state.authorized}/>
-              )}/>
-            </Switch>
-          </Router>
+          <Switch>
+            <Route exact path="/" render={(props) => (
+              <Publications authorized={this.state.authorized}
+                            getUserInfo={this.getUserInfo}
+                            publications={this.state.publications}
+              /> )}
+            />
+
+            <Route path="/publication" render={(props) => (
+              <PublicationPage authorized={this.state.authorized}
+                               getUserInfo={this.getUserInfo}
+                               getPublication={getPublication}
+              /> )}
+            />
+
+            <Route path="/addPublication" render={(props) => (
+              <AddPublication addPublication={this.addPublication}
+              /> )}
+            />
+
+            <Route path="/login" render={(props) => (
+              <Login authorized={this.state.authorized}
+              /> )}
+            />
+
+            <Route path="/register" render={(props) => (
+              <Register authorized={this.state.authorized}/>
+            )}
+            />
+          </Switch>
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 

@@ -33,6 +33,6 @@ class Register extends Component {
       </div>
     );
   };
-};
+}
 
 export default withRouter(Register);

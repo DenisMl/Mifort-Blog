@@ -46,7 +46,8 @@ export default class Header extends React.Component {
         <div className="header">
           <span><h3>{this.props.user.firstName}&ensp;{this.props.user.lastName}</h3></span>
           <div className="header-buttons">
-            <button ref="btn" onClick={this.modalOpen} className="short-btn button">Add publication</button>
+            <Link to="/addPublication" className="short-btn button">Add publication</Link>
+
             <div ref="modal" onClick={this.modalCloseOutside} className="modal">
               <div className="modal-content form">
                 <div className="modal-header">
@@ -59,6 +60,7 @@ export default class Header extends React.Component {
                 </div>
               </div>
             </div>
+
             <form action="/logout" method="post" className="logout-form">
               <button type="submit" className="short-btn button">Logout</button>
             </form>

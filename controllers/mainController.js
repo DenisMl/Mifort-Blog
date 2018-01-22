@@ -1,8 +1,6 @@
 let User = require('../models/user');
 let async = require('async');
 let path = require('path');
-// let Project = require('../models/project');
-// let fs = require('fs');
 let mainController = {};
 
 mainController.mainPage = function (req, res) {
