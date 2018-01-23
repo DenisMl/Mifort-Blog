@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {Route, Link, BrowserRouter as Router, browserHistory, withRouter, Switch} from 'react-router-dom';
+import React, {Component} from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
 class Publication extends Component {
   constructor(props) {
@@ -10,9 +10,7 @@ class Publication extends Component {
   render() {
     const url = `/publication?id=${this.props.publication._id}`;
     return (
-      <div className="publication">
-        <Link to={url}>{this.props.publication.publicationName}</Link>
-      </div>
+      <Link to={url} className="publication-link">{this.props.publication.publicationName}</Link>
     );
   };
 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, Link, BrowserRouter as Router, browserHistory, withRouter, Switch} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import Publication from "./publication";
 
 
@@ -13,7 +13,6 @@ class Publications extends Component {
 
   componentDidMount() {
     if (this.props.authorized == 'false') {
-      console.log(`login`);
       this.props.history.push('/login');
     } else {
       // this.props.getUserInfo();

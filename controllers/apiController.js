@@ -62,7 +62,12 @@ apiController.addPublication = function (req, res) {
     if (doc) {
       res.send('Publication with this name already exists');
     } else {
-      let publication = new Publication({publicationName: req.body.publicationName, author: req.session.user});
+      let publication = new Publication({
+        publicationName: req.body.publicationName,
+        publicationText: req.body.publicationText,
+        tags: req.body.tags,
+        author: req.session.user
+      });
       publication.save(function (err, doc) {
         if (err) {
           res.send(err);

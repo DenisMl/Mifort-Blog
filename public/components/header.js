@@ -48,19 +48,6 @@ export default class Header extends React.Component {
           <div className="header-buttons">
             <Link to="/addPublication" className="short-btn button">Add publication</Link>
 
-            <div ref="modal" onClick={this.modalCloseOutside} className="modal">
-              <div className="modal-content form">
-                <div className="modal-header">
-                  <h4>Add new publication</h4>
-                </div>
-                <div className="modal-body">
-                  <input className="modal-input"  ref={(input) => { this.pubNameInput = input; }} type="text" placeholder="Publication title"
-                         autoFocus/>
-                  <button className="button modal-button" onClick={this.createAndClose}>Add</button>
-                </div>
-              </div>
-            </div>
-
             <form action="/logout" method="post" className="logout-form">
               <button type="submit" className="short-btn button">Logout</button>
             </form>

@@ -32,28 +32,6 @@ export function getPublications() {
   });
 }
 
-export function addPublication(formData) {
-  console.log(formData);
-  debugger;
-  let self = this;
-  let body = JSON.stringify({publicationName: publicationName});
-  fetch('/api/addPublication', {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: body,
-    credentials: 'include'
-  }).then(function (res) {
-    return res.json();
-  }).then(function (res) {
-    self.setState({publications: res});
-  }).catch(function (err) {
-    console.error(`>>err: ${err}`);
-  });
-}
-
 export function getPublication(id) {
   let self = this;
   let body = JSON.stringify({id: id});
@@ -72,4 +50,8 @@ export function getPublication(id) {
   }).catch(function (err) {
     console.error(`>>err: ${err}`);
   });
+}
+
+export function setAppState(newState) {
+  this.setState({publications: newState});
 }

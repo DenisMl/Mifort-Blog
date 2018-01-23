@@ -24,26 +24,21 @@ h1, h2, h3, h4 {
     display: inline-block;
 }
 
-/*::-webkit-scrollbar {*/
-/*width: 0;*/
-/*background: transparent; !* optional: just make scrollbar invisible *!*/
-/*}*/
-
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    /*border: 1px solid yellowgreen;*/
+    /*border: 1px solid #c2c2c2;*/
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #d8d8d8;
+    background: #c2c2c2;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #bcbcbc;
+    background: #b6b6b6;
 }
 
 .label {
@@ -124,6 +119,22 @@ p {
 .publications-wrapper {
     position: relative;
     padding: 20px;
+}
+
+.publications-wrapper .publication-link {
+    text-decoration: none;
+    color: black;
+    display: block;
+    height: 30px;
+    background-color: #aedcff;
+    border-bottom: 1px solid #9bcdf3;
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+.publications-wrapper .publication-link:hover {
+    background-color: #89c9ff;
+    box-shadow: inset 0 0 10px -5px black;
 }
 
 .add-dev {
@@ -374,4 +385,8 @@ p {
     max-height: 200px;
     height: 170px;
     resize: none;
+}
+
+.publication-page {
+    padding: 20px;
 }

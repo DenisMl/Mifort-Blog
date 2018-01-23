@@ -10,7 +10,7 @@ import AddPublication from "../components/addPublication";
 import Login from "../components/login";
 import Register from "../components/register";
 
-import {getUserInfo, getPublications, addPublication, getPublication} from "../components/methods";
+import {getUserInfo, getPublications, setAppState, getPublication} from "../components/methods";
 
 class App extends Component {
 
@@ -20,7 +20,7 @@ class App extends Component {
 
     this.getUserInfo = getUserInfo.bind(this);
     this.getPublications = getPublications.bind(this);
-    this.addPublication = addPublication.bind(this);
+    this.setAppState = setAppState.bind(this);
   };
 
   componentWillMount() {
@@ -56,7 +56,7 @@ class App extends Component {
             />
 
             <Route path="/addPublication" render={(props) => (
-              <AddPublication addPublication={this.addPublication}
+              <AddPublication setAppState={this.setAppState}
               /> )}
             />
 
