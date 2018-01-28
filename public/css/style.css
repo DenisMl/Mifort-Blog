@@ -116,6 +116,10 @@ p {
     cursor: pointer;
 }
 
+.publications {
+    height: 100%;
+}
+
 .publications-wrapper {
     position: relative;
     padding: 20px;
@@ -126,14 +130,16 @@ p {
     color: black;
     display: block;
     height: 30px;
-    background-color: #aedcff;
-    border-bottom: 1px solid #9bcdf3;
+    background-color: #e0f1ff;
+    border-bottom: 1px solid #bbe2ff;
     line-height: 30px;
     padding-left: 10px;
+    /* border: 1px solid black; */
+    /* margin-top: -1px; */
 }
 
 .publications-wrapper .publication-link:hover {
-    background-color: #89c9ff;
+    background-color: #aedcff;
     box-shadow: inset 0 0 10px -5px black;
 }
 
@@ -334,8 +340,10 @@ p {
 }
 
 .main-wrapper {
+    padding-top: 36px;
     position: relative;
-    top: 36px;
+    top: 0;
+    height: calc(100% - 36px);
 }
 
 .add-publication {
@@ -389,4 +397,71 @@ p {
 
 .publication-page {
     padding: 20px;
+}
+
+.react-paginate {
+    text-align: center;
+    user-select: none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.react-paginate .previous a,.react-paginate .next a {
+    width: 70px;
+    display: inline-block;
+}
+
+.react-paginate ul {
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+
+.react-paginate li {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.react-paginate li:focus, .react-paginate a:focus {
+    outline: none;
+}
+
+.react-paginate li a {
+    position: relative;
+    /* float: left; */
+    padding: 6px 12px;
+    text-decoration: none;
+    color: #337ab7;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+    cursor: pointer;
+}
+
+.react-paginate li a:hover {
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.react-paginate .active a {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    cursor: default;
+}
+
+.react-paginate .active a:hover {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    cursor: default;
+}
+
+.react-paginate .break-me a {
+    cursor: default;
+}
+
+.react-paginate .break a {
+    cursor: default;
 }

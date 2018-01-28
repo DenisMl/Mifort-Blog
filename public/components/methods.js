@@ -7,11 +7,11 @@ export function getUserInfo() {
   }).then(function (res) {
     return res.json();
   }).then(function (res) {
-    console.log(`v user:`);
-    console.log(res);
+    // console.log(`v user:`);
+    // console.log(res);
     self.setState({user: res});
   }).catch(function (err) {
-    console.log(`>>err: ${err}`);
+    console.error(`>>err: ${err}`);
   });
 }
 
@@ -24,11 +24,11 @@ export function getPublications() {
   }).then(function (res) {
     return res.json();
   }).then(function (res) {
-    console.log(`v_publications`);
-    console.log(res);
+    // console.log(`v_publications`);
+    // console.log(res);
     self.setState({publications: res});
   }).catch(function (err) {
-    console.log(`>>err: ${err}`);
+    console.error(`>>err: ${err}`);
   });
 }
 
