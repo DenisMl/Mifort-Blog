@@ -18,8 +18,7 @@ apiController.getUserInfo = function (req, res) {
         userInfo = {
           'id': user._id,
           'email': user.email,
-          'firstName': user.firstName,
-          'lastName': user.lastName,
+          'nickname': user.nickname,
           'isManager': user.isManager
         };
         callback(null, userInfo);
@@ -171,8 +170,7 @@ apiController.getAllDevs = function (req, res) {
       users = users.map((user) => {
         return {
           'email': user.email,
-          'firstName': user.firstName,
-          'lastName': user.lastName,
+          'nickname': user.nickname,
           '_id': user._id,
           'created': user.created
         }
@@ -195,8 +193,7 @@ apiController.getProjectDevelopers = function (req, res) {
       developers = developers.map((user) => {
         return {
           'email': user.email,
-          'firstName': user.firstName,
-          'lastName': user.lastName,
+          'nickname': user.nickname,
           '_id': user._id,
           'created': user.created
         }
@@ -219,8 +216,7 @@ apiController.getTaskDevelopers = function (req, res) {
       developers = developers.map((user) => {
         return {
           'email': user.email,
-          'firstName': user.firstName,
-          'lastName': user.lastName,
+          'nickname': user.nickname,
           '_id': user._id,
           'created': user.created
         }
@@ -331,23 +327,21 @@ apiController.addComment = function (req, res) {
   });
 };
 
-apiController.getCommentsAuthors = function (req, res) {
+apiController.getUsersByIDs = function (req, res) {
   User.find({
     _id: {
-      $in: req.body.authorsIDs
+      $in: req.body.usersIDs
     }
-  }, function (err, authors) {
+  }, function (err, users) {
     if (err) {
-      console.error('>> Users not found' + err);
+      console.error('Users not found: ' + err);
       res.end();
     } else {
-      let result = authors.map((user) => {
+      let result = users.map((user) => {
         return {
           'email': user.email,
-          'firstName': user.firstName,
-          'lastName': user.lastName,
-          '_id': user._id,
-          'isManager': user.isManager
+          'nickname': user.nickname,
+          '_id': user._id
         }
       });
       res.json(result);

@@ -38,30 +38,33 @@ export default class Header extends React.Component {
   render() {
     // const props = this.props.location.state.product;
     const user = this.props.user || {};
-    const firstName = user.firstName || '';
-    const lastName = user.lastName || '';
+    const nickname = user.nickname || '';
 
     if (this.props.user) {
       return (
         <div className="header">
-          <span><h3>{this.props.user.firstName}&ensp;{this.props.user.lastName}</h3></span>
-          <div className="header-buttons">
-            <Link to="/addPublication" className="short-btn button">Add publication</Link>
+          <div className="header-content">
+            <span><h3>{this.props.user.nickname}</h3></span>
+            <div className="header-buttons">
+              <Link to="/addPublication" className="short-btn button">Add publication</Link>
 
-            <form action="/logout" method="post" className="logout-form">
-              <button type="submit" className="short-btn button">Logout</button>
-            </form>
+              <form action="/logout" method="post" className="logout-form">
+                <button type="submit" className="short-btn button">Logout</button>
+              </form>
+            </div>
           </div>
         </div>
       );
     } else {
       return (
         <div className="header">
-          <span><h3>{firstName}&ensp;{lastName}</h3></span>
-          <div className="header-buttons">
-            <form action="/logout" method="post" className="logout-form">
-              <button type="submit" className="short-btn button">Logout</button>
-            </form>
+          <div className="header-content">
+            <span><h3>{nickname}</h3></span>
+            <div className="header-buttons">
+              <form action="/logout" method="post" className="logout-form">
+                <button type="submit" className="short-btn button">Logout</button>
+              </form>
+            </div>
           </div>
         </div>
       );

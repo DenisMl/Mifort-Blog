@@ -10,7 +10,7 @@ import AddPublication from "../components/addPublication";
 import Login from "../components/login";
 import Register from "../components/register";
 
-import {getUserInfo, getPublications, setAppState, getPublication} from "../components/methods";
+import {getUserInfo, getPublications, getUsersByIDs, setAppState, getPublication} from "../components/methods";
 
 class App extends Component {
 
@@ -45,6 +45,7 @@ class App extends Component {
               <Publications authorized={this.state.authorized}
                             getUserInfo={this.getUserInfo}
                             publications={this.state.publications}
+                            getUsersByIDs={getUsersByIDs}
               /> )}
             />
 

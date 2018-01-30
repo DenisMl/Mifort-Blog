@@ -19,7 +19,6 @@ class AddPublication extends Component {
       publicationText: this.pubText.value,
       tags: this.pubTags.value
     });
-    console.log(body);
     fetch('/api/addPublication', {
       headers: {
         'Accept': 'application/json',

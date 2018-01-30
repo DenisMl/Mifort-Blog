@@ -121,26 +121,39 @@ p {
 }
 
 .publications-wrapper {
+    width: 90%;
+    min-width: 700px;
+    margin: 0 auto;
     position: relative;
     padding: 20px;
+    box-sizing: content-box;
 }
 
 .publications-wrapper .publication-link {
     text-decoration: none;
     color: black;
     display: block;
-    height: 30px;
-    background-color: #e0f1ff;
-    border-bottom: 1px solid #bbe2ff;
-    line-height: 30px;
+    /* height: 30px; */
+    background-color: #ffffff;
+    border-bottom: 1px dotted #bbe2ff;
+    /* line-height: 30px; */
     padding-left: 10px;
     /* border: 1px solid black; */
     /* margin-top: -1px; */
+    box-shadow: 0 2px 9px -4px black;
 }
 
 .publications-wrapper .publication-link:hover {
-    background-color: #aedcff;
+    background-color: #d1e6f5;
     box-shadow: inset 0 0 10px -5px black;
+}
+
+.publication-author {
+}
+
+.publication-name {
+    font-size: 1.5em;
+    line-height: 1.5em;
 }
 
 .add-dev {
@@ -320,6 +333,7 @@ p {
     z-index: 1;
     background-color: #aedcff;
     margin: 0 auto;
+    /* padding: 0 20px; */
     height: 36px;
 }
 
@@ -332,11 +346,18 @@ p {
     float: left;
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 
 .header-buttons {
 
+}
+
+.header-content {
+    width: 90%;
+    min-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .main-wrapper {
@@ -351,12 +372,13 @@ p {
 }
 
 .add-publication .add-publication-form {
-    width: 80%;
+    width: 90%;
     min-width: 700px;
     margin: 0 auto;
     padding: 40px 20px;
     background-color: white;
     box-shadow: 0 0 9px -3px black;
+    box-sizing: border-box;
 }
 
 .add-publication-form .add-form-input {
@@ -396,7 +418,10 @@ p {
 }
 
 .publication-page {
-    padding: 20px;
+    width: 90%;
+    min-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .react-paginate {

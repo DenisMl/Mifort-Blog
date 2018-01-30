@@ -17,6 +17,8 @@ class Publications extends Component {
     this.renderPublications = this.renderPublications.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.countPages = this.countPages.bind(this);
+    this.getUsersByIDs = this.props.getUsersByIDs.bind(this);
+
   };
 
   componentDidMount() {
@@ -34,18 +36,6 @@ class Publications extends Component {
     this.setState({offset: offset});
   }
 
-  renderPublications() {
-    if (this.props.publications) {
-      let currentPubs = Math.min(this.state.offset + this.state.perPage, this.props.publications.length);
-      let publications = [];
-      for (let i = this.state.offset; i < currentPubs; i++) {
-        publications.push(<Publication publication={this.props.publications[i]} key={i}/>)
-      }
-      // console.log(publications);
-      return publications;
-    }
-  }
-
   countPages(props) {
     if (props.publications) {
       let pageCount = Math.ceil(props.publications.length / this.state.perPage);
@@ -56,11 +46,40 @@ class Publications extends Component {
   }
 
   componentWillMount() {
+    console.log(`componentWillMount`);
+    if (this.props.publications) {
+      let usersIDs = this.props.publications.map(function (pub) {
+        return pub.author;
+      });
+      this.getUsersByIDs(usersIDs);
+    }
     this.countPages(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(`componentWillReceiveProps`);
+    if (this.props.publications) {
+      let usersIDs = this.props.publications.map(function (pub) {
+        return pub.author;
+      });
+      this.getUsersByIDs(usersIDs);
+    }
     this.countPages(nextProps);
+  }
+
+  renderPublications() {
+    if (this.props.publications && this.state.publicationsAuthors) {
+      let currentPubs = Math.min(this.state.offset + this.state.perPage, this.props.publications.length);
+      let publications = [];
+      for (let i = this.state.offset; i < currentPubs; i++) {
+        publications.push(<Publication
+          publication={this.props.publications[i]}
+          author={this.state.publicationsAuthors[this.props.publications[i].author].nickname}
+          key={i}/>)
+      }
+      // console.log(publications);
+      return publications;
+    }
   }
 
   render() {

@@ -56,8 +56,7 @@ mainController.login = function (req, res, next) {
 
 mainController.register = function (req, res, next) {
   let email = req.body.email;
-  let firstName = req.body.firstName;
-  let lastName = req.body.lastName;
+  let nickname = req.body.nickname;
   let password = req.body.password;
   let isManager = (req.body.isManager) ? true : false;
 
@@ -73,8 +72,7 @@ mainController.register = function (req, res, next) {
       } else {
         let user = new User({
           email: email,
-          firstName: firstName,
-          lastName: lastName,
+          nickname: nickname,
           password: password,
           isManager: isManager
         });

@@ -9,11 +9,7 @@ let schema = new Schema({
     unique: true,
     required: true
   },
-  firstName: {
-    type: String,
-    required: true
-  },
-  lastName: {
+  nickname: {
     type: String,
     required: true
   },
