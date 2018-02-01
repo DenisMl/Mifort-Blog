@@ -38,14 +38,13 @@ class AddPublication extends Component {
     });
   }
 
-
   render() {
     return (
       <div className="add-publication">
         <form onSubmit={this.addPublication} className="register-form add-publication-form">
           <input name="title" type="text" ref={(input) => {
             this.pubTitle = input;
-          }} className="add-form-input add-publication-title" placeholder="Title" autoComplete="off" autoFocus
+          }} className="add-form-input add-publication-title" maxLength="40" placeholder="Title" autoComplete="off" autoFocus
                  required/>
           <textarea name="text" type="text" ref={(input) => {
             this.pubText = input;

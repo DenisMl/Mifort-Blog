@@ -8,26 +8,38 @@ class PublicationPage extends Component {
     this.state = {publicationId: queryString.parse(location.search).id}
 
     this.getPublication = this.props.getPublication.bind(this);
+    this.getUsersByIDs = this.props.getUsersByIDs.bind(this);
   };
 
   componentWillMount() {
     this.getPublication(this.state.publicationId);
-
   }
 
   render() {
-    // console.log(`publicationId: ${this.state.publicationId}`);
     if (this.state.publication) {
+      let date = new Date(this.state.publication.created);
+
       return (
         <div className="publication-page">
-          <h1>{this.state.publication.publicationName}</h1>
-          <p>{this.state.publication.publicationText}</p>
+          <div className="publication-page-wrapper">
+            <div className="publication-page-header">
+              <div className="publication-page-name">
+                {this.state.publication.publicationName}
+              </div>
+              <div className="publication-page-date">
+                {date.getHours() + ':' + date.getMinutes() + '  ' + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()}
+              </div>
+            </div>
+            <div className="publication-page-text">
+              {this.state.publication.publicationText}
+            </div>
+          </div>
         </div>
       );
-    } else {
+    }
+    else {
       return (
-        <div className="publication-page">
-          <h1>LOADING...</h1>
+        <div className="publication-page-page">
         </div>
       )
     }

@@ -16,7 +16,11 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      user: {
+        id: ''
+      }
+    };
 
     this.getUserInfo = getUserInfo.bind(this);
     this.getPublications = getPublications.bind(this);
@@ -39,38 +43,41 @@ class App extends Component {
         <div className="all-wrapper">
           <Header user={this.state.user}/>
           <div className="main-wrapper">
+            <Switch>
+              <Route exact path="/" render={(props) => (
+                <Publications authorized={this.state.authorized}
+                              getUserInfo={this.getUserInfo}
+                              publications={this.state.publications}
+                              getUsersByIDs={getUsersByIDs}
+                              currentUserId={this.state.user.id}
+                              setAppState={this.setAppState}
+                /> )}
+              />
 
-          <Switch>
-            <Route exact path="/" render={(props) => (
-              <Publications authorized={this.state.authorized}
-                            getUserInfo={this.getUserInfo}
-                            publications={this.state.publications}
-                            getUsersByIDs={getUsersByIDs}
-              /> )}
-            />
+              <Route path="/publication" render={(props) => (
+                <PublicationPage authorized={this.state.authorized}
+                                 getUserInfo={this.getUserInfo}
+                                 publications={this.state.publications}
+                                 getPublication={getPublication}
+                                 getUsersByIDs={getUsersByIDs}
+                /> )}
+              />
 
-            <Route path="/publication" render={(props) => (
-              <PublicationPage authorized={this.state.authorized}
-                               getUserInfo={this.getUserInfo}
-                               getPublication={getPublication}
-              /> )}
-            />
+              <Route path="/addPublication" render={(props) => (
+                <AddPublication setAppState={this.setAppState}
+                /> )}
+              />
 
-            <Route path="/addPublication" render={(props) => (
-              <AddPublication setAppState={this.setAppState}
-              /> )}
-            />
+              <Route path="/login" render={(props) => (
+                <Login authorized={this.state.authorized}
+                /> )}
+              />
 
-            <Route path="/login" render={(props) => (
-              <Login authorized={this.state.authorized}
-              /> )}
-            />
-
-            <Route path="/register" render={(props) => (
-              <Register authorized={this.state.authorized}/>
-            )}
-            />
-          </Switch>
+              <Route path="/register" render={(props) => (
+                <Register authorized={this.state.authorized}/>
+              )}
+              />
+            </Switch>
           </div>
         </div>
       </BrowserRouter>

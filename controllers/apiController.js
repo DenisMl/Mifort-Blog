@@ -18,8 +18,7 @@ apiController.getUserInfo = function (req, res) {
         userInfo = {
           'id': user._id,
           'email': user.email,
-          'nickname': user.nickname,
-          'isManager': user.isManager
+          'nickname': user.nickname
         };
         callback(null, userInfo);
       } else {
@@ -37,7 +36,7 @@ apiController.getUserInfo = function (req, res) {
 };
 
 apiController.getPublications = function (req, res) {
-  Publication.find({}, function (err, doc) {
+  Publication.find({}).sort('-created').exec(function (err, doc) {
     if (err) {
       res.send(err);
     } else {
@@ -79,250 +78,12 @@ apiController.addPublication = function (req, res) {
   });
 };
 
-apiController.deleteProject = function (req, res) {
-  Project.findByIdAndRemove(req.body.projectId, function (err, project) {
+apiController.deletePublication = function (req, res) {
+  Publication.findByIdAndRemove(req.body.publicationId, function (err, publication) {
     if (err) {
-      console.error('>> ' + err);
-      res.end();
-    }
-    res.send(project);
-  });
-};
-
-apiController.deleteTask = function (req, res) {
-  Project.findByIdAndUpdate(req.body.projectId, { //id of project
-    $pull: {
-      'tasks': {
-        _id: req.body.taskId
-      }
-    }
-  }, function (err, task) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
+      res.send(err);
     } else {
-      res.send(task);
-    }
-  });
-};
-
-apiController.createTask = function (req, res) {
-  Project.findByIdAndUpdate(req.body.projectId, { //id of project
-    $push: {
-      'tasks': {
-        taskName: req.body.taskName,
-        author: req.session.user
-      }
-    }
-  }, {
-    upsert: true,
-    new: true
-  }, function (err, task) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
-    } else {
-      res.send(task);
-    }
-  });
-};
-
-apiController.addDevToProject = function (req, res) {
-  let developers;
-  async.waterfall([
-    function (callback) {
-      Project.findById(req.body.projectId, 'developers', callback);
-    },
-    function (project, callback) {
-      developers = project.developers;
-      req.body.devsId.map(function (devId) {
-        if (project.developers.indexOf(devId) === -1) { //includes don't work properely
-          developers.push(devId);
-        }
-      });
-      callback(null, developers);
-    },
-    function (developers, callback) {
-      Project.findByIdAndUpdate(req.body.projectId, {
-        developers: developers
-      }, {
-        new: true
-      }, callback);
-    }
-  ], function (err, updProj) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
-    } else {
-      res.send(updProj.developers);
-    }
-  });
-};
-
-apiController.getAllDevs = function (req, res) {
-  User.find({
-    isManager: false
-  }, function (err, users) {
-    if (err) {
-      console.error('>> Users not found' + err);
-      res.end();
-    } else {
-      users = users.map((user) => {
-        return {
-          'email': user.email,
-          'nickname': user.nickname,
-          '_id': user._id,
-          'created': user.created
-        }
-      });
-      res.json(users);
-    }
-  });
-};
-
-apiController.getProjectDevelopers = function (req, res) {
-  User.find({
-    _id: {
-      $in: req.body.projectDevelopers
-    }
-  }, function (err, developers) {
-    if (err) {
-      console.error('>> Users not found' + err);
-      res.end();
-    } else {
-      developers = developers.map((user) => {
-        return {
-          'email': user.email,
-          'nickname': user.nickname,
-          '_id': user._id,
-          'created': user.created
-        }
-      });
-      res.json(developers);
-    }
-  });
-};
-
-apiController.getTaskDevelopers = function (req, res) {
-  User.find({
-    _id: {
-      $in: req.body.taskDevelopers
-    }
-  }, function (err, developers) {
-    if (err) {
-      console.error('>> Users not found' + err);
-      res.end();
-    } else {
-      developers = developers.map((user) => {
-        return {
-          'email': user.email,
-          'nickname': user.nickname,
-          '_id': user._id,
-          'created': user.created
-        }
-      });
-      res.json(developers);
-    }
-  });
-};
-
-apiController.addDevToTask = function (req, res) {
-  let developers;
-  async.waterfall([
-    function (callback) {
-      Project.findOne({
-        '_id': req.body.projectId
-        // 'tasks._id': req.body.taskId
-      }, callback);
-    },
-    function (project, callback) {
-      let task = project.tasks.find(function (task) {
-        if (task._id == req.body.taskId) {
-          return true;
-        }
-      });
-      developers = task.developers;
-      req.body.devsId.map(function (devId) {
-        if (task.developers.indexOf(devId) === -1) {
-          developers.push(devId);
-        }
-      });
-      callback(null, developers);
-    },
-    function (developers, callback) {
-      Project.findOneAndUpdate({
-        '_id': req.body.projectId,
-        'tasks._id': req.body.taskId
-      }, {
-        $set: {
-          'tasks.$.developers': developers
-        }
-      }, {
-        new: true
-      }, callback);
-
-    }
-  ], function (err, updProj) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
-    } else {
-      let taskDevelopers = updProj.tasks.find(function (task) {
-        if (task._id == req.body.taskId) {
-          return true;
-        }
-      }).developers;
-      res.send(taskDevelopers);
-    }
-  });
-};
-
-apiController.changeTaskStatus = function (req, res) {
-  Project.findOneAndUpdate({
-    '_id': req.body.projectId,
-    'tasks._id': req.body.taskId
-  }, {
-    $set: {
-      'tasks.$.status': req.body.status
-    }
-  }, function (err, updProj) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
-    } else {
-      res.send();
-    }
-  });
-};
-
-apiController.addComment = function (req, res) {
-  Project.findOneAndUpdate({
-    '_id': req.body.projectId,
-    'tasks._id': req.body.taskId
-  }, {
-    $push: {
-      'tasks.$.comments': {
-        author: req.session.user,
-        text: req.body.commentText
-      }
-    }
-  }, {
-    upsert: true,
-    new: true
-  }, function (err, updProj) {
-    if (err) {
-      console.error('>> ' + err);
-      res.end();
-    } else {
-      let task = updProj.tasks.find(function (task) {
-        if (task._id == req.body.taskId) {
-          return true;
-        }
-      });
-      let authorsIDs = task.comments.map(function (comment) {
-        return comment.author;
-      });
-      res.json(authorsIDs);
+      apiController.getPublications(req, res);
     }
   });
 };

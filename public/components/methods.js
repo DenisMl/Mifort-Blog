@@ -30,8 +30,6 @@ export function getUsersByIDs(usersIDs) {
   }).then(function (res) {
     return res.json();
   }).then(function (res) {
-    console.log(`res`);
-    console.log(res);
     let publicationsAuthorsObj = {};
     res.map(function (author) {
       publicationsAuthorsObj[author._id] = {
@@ -40,8 +38,6 @@ export function getUsersByIDs(usersIDs) {
     });
     self.setState({publicationsAuthors: publicationsAuthorsObj});
     return res;
-  }).then(function (res) {
-    console.log(self.state.publicationsAuthors);
   });
 }
 

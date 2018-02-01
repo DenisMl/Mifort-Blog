@@ -24,8 +24,6 @@ class Publications extends Component {
   componentDidMount() {
     if (this.props.authorized == 'false') {
       this.props.history.push('/login');
-    } else {
-
     }
   }
 
@@ -46,7 +44,6 @@ class Publications extends Component {
   }
 
   componentWillMount() {
-    console.log(`componentWillMount`);
     if (this.props.publications) {
       let usersIDs = this.props.publications.map(function (pub) {
         return pub.author;
@@ -57,7 +54,6 @@ class Publications extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(`componentWillReceiveProps`);
     if (this.props.publications) {
       let usersIDs = this.props.publications.map(function (pub) {
         return pub.author;
@@ -72,20 +68,20 @@ class Publications extends Component {
       let currentPubs = Math.min(this.state.offset + this.state.perPage, this.props.publications.length);
       let publications = [];
       for (let i = this.state.offset; i < currentPubs; i++) {
-        publications.push(<Publication
-          publication={this.props.publications[i]}
-          author={this.state.publicationsAuthors[this.props.publications[i].author].nickname}
-          key={i}/>)
+        publications.push(
+          <Publication
+            publication={this.props.publications[i]}
+            author={this.state.publicationsAuthors[this.props.publications[i].author].nickname}
+            key={i}
+            currentUserId={this.props.currentUserId}
+            setAppState={this.props.setAppState}
+          />)
       }
-      // console.log(publications);
       return publications;
     }
   }
 
   render() {
-    // console.log(`this.props.publications`);
-    // console.log(this.props.publications);
-
     return (
       <div className="publications">
         <div className="publications-wrapper">
