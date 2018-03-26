@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-let config = require('../config');
+let config = require('../config/index');
 
 mongoose.connect(config.get('mongoose:uri'), config.get('mongoose:options'));
 

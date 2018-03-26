@@ -9,12 +9,12 @@ mainController.mainPage = function (req, res) {
     console.log(`>>NO session: ${req.session.user}`);
     // res.setHeader("Authorized", "false");
     res.setHeader("Set-Cookie", ["Authorized=false"]);
-    res.sendFile(path.resolve(__dirname, '../public/main.html'));
+    res.sendFile(path.resolve(__dirname, '../../frontend/src/main.html'));
   } else {
     console.log(`>>session: ${req.session.user}`);
     // res.setHeader("Authorized", "true");
     res.setHeader("Set-Cookie", ["Authorized=true"]);
-    res.sendFile(path.resolve(__dirname, '../public/main.html'));
+    res.sendFile(path.resolve(__dirname, '../../frontend/src/main.html'));
   }
 };
 

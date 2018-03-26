@@ -1,7 +1,7 @@
 let express = require('express');
 let http = require('http');
 let path = require('path');
-let config = require('./config');
+let config = require('./config/index');
 let bodyParser = require('body-parser');
 let cookieParser = require('cookie-parser');
 let morgan = require('morgan');
@@ -30,7 +30,7 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('../frontend/src'));
 
 app.use('/api', apiRoutes);
 app.use('/', mainRoutes);
