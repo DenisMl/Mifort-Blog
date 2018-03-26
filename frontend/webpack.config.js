@@ -1,22 +1,21 @@
-var path = require('path');
-var webpack = require('webpack');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+
+const htmlPlugin = new HtmlWebPackPlugin({
+  template: "./src/index.html",
+  filename: "./index.html"
+});
 
 module.exports = {
-  entry: './public/js/app.js',
-  output: {
-    path: __dirname + "/public/js", // or path: path.join(__dirname, "dist/js"),
-    filename: "bundle.js"
-  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react']
-        },
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
       }
     ]
-  }
+  },
+  plugins: [htmlPlugin]
 };

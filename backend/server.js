@@ -30,6 +30,7 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(express.static('../frontend/dist'));
 app.use(express.static('../frontend/src'));
 
 app.use('/api', apiRoutes);
