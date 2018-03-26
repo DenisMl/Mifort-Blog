@@ -86,4 +86,6 @@ class App extends Component {
 
 }
 
+export default App;
+
 ReactDOM.render(<App/>, document.getElementById('root'));
