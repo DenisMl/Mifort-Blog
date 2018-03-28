@@ -4,13 +4,14 @@ import Cookies from 'universal-cookie';
 import {Route, BrowserRouter, browserHistory, Switch} from 'react-router-dom';
 
 import Header from './components/header';
-import Publications from "./components/publications";
-import PublicationPage from "./components/publicationPage";
-import AddPublication from "./components/addPublication";
-import Login from "./components/login";
-import Register from "./components/register";
+import Publications from "./components/publications/publications";
+import PublicationPage from "./components/publicationPage/publicationPage";
+import AddPublication from "./components/addPublication/addPublication";
+import Login from "./components/login/login";
+import Register from "./components/register/register";
 
-import {getUserInfo, getPublications, getUsersByIDs, setAppState, getPublication} from "./components/methods";
+import {getUserInfo, getPublications, getUsersByIDs, setAppState, getPublication} from "./js/methods";
+import './style.scss';
 
 class App extends Component {
 

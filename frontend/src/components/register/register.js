@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Link, BrowserRouter as Router, browserHistory, withRouter, Switch} from 'react-router-dom';
 
+import './style.scss'
 
 class Register extends Component {
   constructor(props) {

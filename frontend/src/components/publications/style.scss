@@ -1,0 +1,56 @@
+.react-paginate {
+    text-align: center;
+    user-select: none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    .previous a, .react-paginate .next a {
+        width: 70px;
+        display: inline-block;
+    }
+    ul {
+        margin: 0 0 15px 0;
+        padding: 0;
+    }
+    li {
+        display: inline-block;
+        cursor: pointer;
+    }
+    li:focus, .react-paginate a:focus {
+        outline: none;
+    }
+    li a {
+        position: relative;
+        /* float: left; */
+        padding: 6px 12px;
+        text-decoration: none;
+        color: #337ab7;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin-left: -1px;
+        cursor: pointer;
+        &:hover {
+            color: #23527c;
+            background-color: #eee;
+            border-color: #ddd;
+        }
+    }
+    .active a {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #337ab7;
+        cursor: default;
+        &:hover {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #337ab7;
+            cursor: default;
+        }
+    }
+    .break-me a {
+        cursor: default;
+    }
+    .break a {
+        cursor: default;
+    }
+}

@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
-import Publication from "./publication";
+import Publication from "../publication/publication";
 
+import './style.scss';
 
 class Publications extends Component {
   constructor(props) {

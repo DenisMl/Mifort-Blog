@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Route, Link, withRouter} from 'react-router-dom';
 
+import './style.scss'
+
 class AddPublication extends Component {
   constructor(props) {
     super(props);

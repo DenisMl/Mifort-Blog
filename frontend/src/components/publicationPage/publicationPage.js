@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Route, Link, withRouter} from 'react-router-dom';
 import queryString from 'query-string';
 
+import './style.scss';
+
 class PublicationPage extends Component {
   constructor(props) {
     super(props);
