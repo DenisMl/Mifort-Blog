@@ -23,7 +23,7 @@ class Publications extends Component {
   };
 
   componentDidMount() {
-    if (this.props.authorized == 'false') {
+    if (this.props.authorized === false) {
       this.props.history.push('/login');
     }
   }

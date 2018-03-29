@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Cookies from 'universal-cookie';
 import {Route, BrowserRouter, browserHistory, Switch} from 'react-router-dom';
 
-import Header from './components/header';
+import Header from './components/header/header';
 import Publications from "./components/publications/publications";
 import PublicationPage from "./components/publicationPage/publicationPage";
 import AddPublication from "./components/addPublication/addPublication";
@@ -30,12 +30,12 @@ class App extends Component {
 
   componentWillMount() {
     const cookies = new Cookies();
-    let authorized = cookies.get('Authorized');
+    let authorized = (cookies.get('Authorized') === 'true');
     if (authorized) {
       this.getPublications();
       this.getUserInfo();
     }
-    this.setState({authorized: cookies.get('Authorized')});
+    this.setState({authorized: authorized});
   }
 
   render() {

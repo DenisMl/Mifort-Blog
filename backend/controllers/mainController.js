@@ -19,6 +19,7 @@ mainController.mainPage = function (req, res) {
 
 mainController.logout = function (req, res) {
   req.session.destroy();
+  res.setHeader("Set-Cookie", ["Authorized=false"]);
   res.redirect('/');
 };
 
@@ -48,6 +49,7 @@ mainController.login = function (req, res, next) {
       res.redirect('/login');
     } else {
       req.session.user = user._id;
+      res.setHeader("Set-Cookie", ["Authorized=true"]);
       res.redirect('/');
     }
   });
