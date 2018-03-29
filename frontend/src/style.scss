@@ -81,4 +81,5 @@ p {
     position: relative;
     top: 0;
     height: calc(100% - 36px);
+    box-sizing: border-box;
 }
