@@ -1,6 +1,7 @@
 .publication-page {
     width: 90%;
     min-width: 700px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
 
@@ -8,16 +9,15 @@
         width: 100%;
         min-width: 700px;
         height: calc(100% - 20px);
-        margin: 20px auto 0;
+        margin: 20px auto 10px;
         position: relative;
-        /* padding: 20px; */
         padding-bottom: 0;
-        box-sizing: content-box;
+        box-sizing: border-box;
         box-shadow: 0 0 7px -3px black;
         .publication-page-header {
             height: 36px;
             padding: 0 20px;
-            background-color: #d1e6f5;
+            background: linear-gradient(to right, #6b9dca 0%, #b8dfff 100%);
         }
         .publication-page-name {
             font-size: 22px;

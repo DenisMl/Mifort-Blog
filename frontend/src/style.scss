@@ -5,7 +5,8 @@ html {
 body {
     background: #f7f7f7;
     margin: 0;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: 'Merriweather', serif;
+    //font-family: Verdana, Geneva, sans-serif;
     height: 100%;
 }
 
@@ -18,6 +19,7 @@ body {
 }
 
 h1, h2, h3, h4 {
+    font-family: "Roboto", sans-serif;
     font-size: 17px;
     margin: 7px 0 7px 0;
     display: inline-block;
@@ -80,6 +82,6 @@ p {
     padding-top: 36px;
     position: relative;
     top: 0;
-    height: calc(100% - 36px);
+    height: 100%;
     box-sizing: border-box;
 }

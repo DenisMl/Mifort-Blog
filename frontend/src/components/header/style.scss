@@ -5,6 +5,7 @@
     box-shadow: 0 0 9px -4px black;
     z-index: 1;
     background-color: #aedcff;
+    background: linear-gradient(to right, #79b3e0 0%, #d2ecff 100%);
     margin: 0 auto;
     height: 36px;
 
@@ -12,7 +13,7 @@
         max-width: 1000px;
     }
     span {
-        height: 100%;
+        line-height: 22px;
         float: left;
         display: flex;
         align-items: center;
@@ -20,6 +21,7 @@
     .header-content {
         width: 90%;
         min-width: 700px;
+        max-width: 1000px;
         margin: 0 auto;
         padding: 0 20px;
     }

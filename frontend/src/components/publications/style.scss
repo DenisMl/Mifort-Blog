@@ -1,15 +1,19 @@
 .react-paginate {
     text-align: center;
     user-select: none;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    .previous a, .react-paginate .next a {
+    .previous a{
         width: 70px;
         display: inline-block;
     }
+    .next a {
+        width: 69px;
+        display: inline-block;
+    }
     ul {
-        margin: 0 0 15px 0;
+        margin: 0 0 5px;
         padding: 0;
     }
     li {
