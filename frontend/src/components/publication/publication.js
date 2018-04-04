@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import TagsList from "../common/tagsList/tagsList";
+
 
 import './style.scss';
 
@@ -46,6 +48,7 @@ class Publication extends Component {
           <div className="publication-name">
             {this.props.publication.publicationName}
           </div>
+          <TagsList tags={this.props.publication.tags}/>
           <div className="publication-date">
             {date.getHours() + ':' + date.getMinutes() + '  ' + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()}
           </div>

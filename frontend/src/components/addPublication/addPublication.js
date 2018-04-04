@@ -14,12 +14,12 @@ class AddPublication extends Component {
 
   addPublication(e) {
     e.preventDefault();
-    console.log(e);
     let self = this;
+    let tags = this.pubTags.value.split(' ');
     let body = JSON.stringify({
       publicationName: this.pubTitle.value,
       publicationText: this.pubText.value,
-      tags: this.pubTags.value
+      tags: tags
     });
     fetch('/api/addPublication', {
       headers: {
@@ -36,7 +36,7 @@ class AddPublication extends Component {
       self.props.history.push('/');
 
     }).catch(function (err) {
-      console.error(`>>err: ${err}`);
+      console.error(err);
     });
   }
 

@@ -25,8 +25,9 @@
             }
             .publication-header {
                 height: 36px;
-                padding: 0 10px;
+                overflow: hidden;
                 background: linear-gradient(to right, #79b3e0 0%, #d2ecff 100%);
+                padding: 0 10px;
                 .publication-delete-btn {
                     display: inline-block;
                     float: right;
@@ -41,10 +42,10 @@
                         font-size: 15px;
                         font-weight: 200;
                         background-color: transparent;
-                        color: #d1e6f5;
+                        color: #7ab4e0;
                     }
                     .short-btn:hover {
-                        color: #8a2727;
+                        color: #12317b;
                     }
                 }
                 .publication-author {
@@ -58,6 +59,7 @@
                 .publication-name {
                     font-size: 22px;
                     line-height: 36px;
+                    overflow: hidden;
                     display: inline-block;
                 }
                 .publication-date {
