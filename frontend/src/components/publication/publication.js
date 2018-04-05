@@ -48,7 +48,9 @@ class Publication extends Component {
           <div className="publication-name">
             {this.props.publication.publicationName}
           </div>
-          <TagsList tags={this.props.publication.tags}/>
+          <TagsList tags={this.props.publication.tags}
+                    filterPublications={this.props.filterPublications}
+          />
           <div className="publication-date">
             {date.getHours() + ':' + date.getMinutes() + '  ' + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()}
           </div>

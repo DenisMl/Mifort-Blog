@@ -11,7 +11,7 @@ class Tag extends Component {
 
   render() {
     return (
-      <span className="tag">
+      <span className="tag" onClick={(e) => {this.props.filterPublications(e, this.props.tag)}}>
         {this.props.tag}
       </span>
     );

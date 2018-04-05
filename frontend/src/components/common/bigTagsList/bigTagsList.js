@@ -5,7 +5,7 @@ import Tag from "./tag/tag";
 
 import './style.scss';
 
-class TagsList extends Component {
+class BigTagsList extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,10 +15,7 @@ class TagsList extends Component {
     if (this.props.tags[0]) {
       return this.props.tags.map((tag, i) => {
         return (
-          <Tag key={i}
-               tag={tag}
-               filterPublications={this.props.filterPublications}
-          />
+          <Tag key={i} tag={tag}/>
         )
       })
     }
@@ -26,11 +23,11 @@ class TagsList extends Component {
 
   render() {
     return (
-      <div className="tags-list">
+      <div className="big-tags-list">
         {this.renderTagsList()}
       </div>
     );
   };
 }
 
-export default withRouter(TagsList);
+export default withRouter(BigTagsList);

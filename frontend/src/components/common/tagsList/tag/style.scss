@@ -1,0 +1,14 @@
+.tags-list {
+    .tag {
+        background-color: #ecf7ff;
+        border: 1px solid #7b94a7;
+        border-radius: 0;
+        padding: 3px 7px 2px;
+        margin: 0 1px;
+        cursor: pointer;
+    }
+    .tag:hover {
+        background-color: #ffffff;
+    }
+}
+

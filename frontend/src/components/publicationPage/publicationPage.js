@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Link, withRouter} from 'react-router-dom';
 import queryString from 'query-string';
+import BigTagsList from "../common/bigTagsList/bigTagsList";
 
 import './style.scss';
 
@@ -20,6 +21,7 @@ class PublicationPage extends Component {
   render() {
     if (this.state.publication) {
       let date = new Date(this.state.publication.created);
+      let bigTagsList = (this.state.publication.tags[0]) ? <BigTagsList tags={this.state.publication.tags}/> : null;
 
       return (
         <div className="publication-page">
@@ -35,6 +37,7 @@ class PublicationPage extends Component {
             <div className="publication-page-text">
               {this.state.publication.publicationText}
             </div>
+            {bigTagsList}
           </div>
         </div>
       );

@@ -15,7 +15,7 @@ class AddPublication extends Component {
   addPublication(e) {
     e.preventDefault();
     let self = this;
-    let tags = this.pubTags.value.split(' ');
+    let tags = this.pubTags.value.trim().split(/,?\s+/);
     let body = JSON.stringify({
       publicationName: this.pubTitle.value,
       publicationText: this.pubText.value,

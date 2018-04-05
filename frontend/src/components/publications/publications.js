@@ -18,6 +18,7 @@ class Publications extends Component {
     this.renderPublications = this.renderPublications.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.countPages = this.countPages.bind(this);
+    this.filterPublications = this.filterPublications.bind(this);
     this.getUsersByIDs = this.props.getUsersByIDs.bind(this);
 
   };
@@ -64,20 +65,39 @@ class Publications extends Component {
     this.countPages(nextProps);
   }
 
+  filterPublications(e, tag) {
+    e.preventDefault();
+    let filteredPublications = this.props.publications.filter((publication) => {
+      return publication.tags.includes(tag);
+    });
+    this.setState({
+      filteredPublications: filteredPublications
+    })
+  }
+
   renderPublications() {
     if (this.props.publications && this.state.publicationsAuthors) {
-      let currentPubs = Math.min(this.state.offset + this.state.perPage, this.props.publications.length);
       let publications = [];
-      for (let i = this.state.offset; i < currentPubs; i++) {
-        publications.push(
-          <Publication
-            publication={this.props.publications[i]}
-            author={this.state.publicationsAuthors[this.props.publications[i].author].nickname}
-            key={i}
-            currentUserId={this.props.currentUserId}
-            setAppState={this.props.setAppState}
-          />)
+      let currPublicationsNumber;
+      let currPublications;
+      if (this.state.filteredPublications) {
+        currPublications = this.state.filteredPublications;
+        currPublicationsNumber = Math.min(this.state.offset + this.state.perPage, this.state.filteredPublications.length);
+      } else {
+        currPublications = this.props.publications;
+        currPublicationsNumber = Math.min(this.state.offset + this.state.perPage, this.props.publications.length);
       }
+        for (let i = this.state.offset; i < currPublicationsNumber; i++) {
+          publications.push(
+            <Publication
+              publication={currPublications[i]}
+              author={this.state.publicationsAuthors[this.props.publications[i].author].nickname}
+              key={i}
+              currentUserId={this.props.currentUserId}
+              setAppState={this.props.setAppState}
+              filterPublications={this.filterPublications}
+            />)
+        }
       return publications;
     }
   }
