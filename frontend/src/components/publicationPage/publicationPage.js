@@ -34,8 +34,8 @@ class PublicationPage extends Component {
                 {date.getHours() + ':' + date.getMinutes() + '  ' + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()}
               </div>
             </div>
-            <div className="publication-page-text">
-              {this.state.publication.publicationText}
+            <div className="publication-page-text"
+                 dangerouslySetInnerHTML={{__html: this.state.publication.publicationText}}>
             </div>
             {bigTagsList}
           </div>

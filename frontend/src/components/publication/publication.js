@@ -61,8 +61,7 @@ class Publication extends Component {
             {deleteBtn}
           </div>
         </div>
-        <div className="publication-text">
-          {this.props.publication.publicationText}
+        <div className="publication-text" dangerouslySetInnerHTML={{__html: this.props.publication.publicationText}}>
         </div>
       </Link>
     );
